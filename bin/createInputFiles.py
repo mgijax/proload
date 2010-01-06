@@ -27,7 +27,7 @@
 #           7. blank
 #           8. blank
 #	 2. tab delimited file in assocload format:
-#	    line 1 header: "MGI" "Protein Ontology"
+#	    line 1 header: "MGI" "Protein Ontology (PRO)"
 # 	    1. MGI ID
 #           2. PRO ID
 #	 3. log file
@@ -51,6 +51,8 @@ import string
 
 print '%s' % mgi_utils.date()
 
+# PRO logical DB Name
+proLDBName = os.environ['ASSOC_EXTERNAL_LDB']
 # paths to input and two output files
 inFilePath = os.environ['INFILE_NAME_PRO']
 vocFilePath = os.environ['INFILE_NAME_VOC']
@@ -93,7 +95,7 @@ except:
 #
 
 # write out assocload header
-assocFile.write('%s%s%s%s' % ('MGI', TAB, 'PRO', CRT))
+assocFile.write('%s%s%s%s' % ('MGI', TAB, proLDBName, CRT))
 
 # throw away header line
 header = inFile.readline()

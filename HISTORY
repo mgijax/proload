@@ -1,3 +1,10 @@
+TAG: proload-4-3-3-4
+DATE:
+STAFF: sc
+CHANGES:TR 9697; 4.33 maint release
+1) proload.config.default updated logical db from 'PRO' to 'Protein Ontology (PRO)'
+2) createInputFile.py - get ldb name from environment
+
 TAG: proload-4-3-3-3
 TAG: proload-4-3-3-2
 TAG: proload-4-3-3-1
