@@ -26,7 +26,7 @@ fi
 . ${MGICONFIG}/master.config.sh
 
 #  Association Loader shell script
-ASSOCLOADER_SH=/usr/local/mgi/test/dataload/assocload/bin/AssocLoad.sh
+ASSOCLOADER_SH=${ASSOCLOAD}/bin/AssocLoad.sh
 
 export ASSOCLOADER_SH
 
