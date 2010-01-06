@@ -119,7 +119,7 @@ CONFIG_LOAD=${PROLOAD}/proload.config
 echo "Running Protein Ontology association load" >> ${LOG_DIAG}
 ${ASSOCLOADER_SH} ${CONFIG_LOAD} ${JOBKEY}
 STAT=$?
-checkStatus ${STAT} "${ASSOCLOADER_SH}/bin/AssocLoad.sh ${CONFIG_LOAD}"
+checkStatus ${STAT} "${ASSOCLOADER_SH} ${CONFIG_LOAD}"
 
 #
 # run postload cleanup and email logs
