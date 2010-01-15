@@ -1,3 +1,12 @@
+TAG: proload-4-3-3-5
+DATE:
+STAFF: sc
+CHANGES:TR 9697; 4.33 maint release
+1) update proload.config.default - updated INFILE_NAME_PRO setting
+   to ${DATADOWNLOADS}/pro_mappings/PRO_mgi.txt. 'pro_mappings'
+   is the symlink to a longer directory path to PRO_mgi.txt
+   
+
 TAG: proload-4-3-3-4
 DATE:
 STAFF: sc
