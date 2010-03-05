@@ -8,6 +8,10 @@
 # Usage: createInputFiles.py
 # Env Vars:
 #	 1. OUTFILE_NAME
+#	 2. ASSOC_EXTERNAL_LDB
+#	 3. INFILE_NAME_PRO
+#	 4. INFILE_NAME_VOC
+#	 5. INFILE_NAME (assocload)
 #
 # Inputs:
 #	1. PRO ID to MGI mapping file tab-delimited in following format:
