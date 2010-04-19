@@ -1,3 +1,13 @@
+TAG: proload-4-3-3-7
+DATE:04/19/2010
+STAFF: sc
+CHANGES:
+1) createInputFiles.py - updated with new file format
+   format changed from one line per pro id with semi-colon delimited
+   list of MGI IDs in column three TO one line per MGI ID.
+2) createInputFiles.sh - updated to only load when new file
+   available
+
 TAG: proload-4-3-3-6
 DATE:03/05/2010
 STAFF: sc

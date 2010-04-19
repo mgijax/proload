@@ -15,6 +15,8 @@
 #
 # Inputs:
 #	1. PRO ID to MGI mapping file tab-delimited in following format:
+#	   Note that there can be multiple pro ID to marker mappings
+#	   So we need to filter out dups for the vocload file
 #	    1. PRO ID
 #	    2. PRO name
 #	    3. MGI ID(s) ';' (semi-colon) delimited
@@ -71,9 +73,13 @@ vocFile = ''
 # output for assocload
 assocFile = ''
 
+# constants
 TAB= '\t'
 CRT = '\n'
 SPACE = ' '
+
+# current set of pro IDs currently written to vocload input file
+proIdList = []
 
 #
 # Initialize
@@ -108,13 +114,11 @@ for line in inFile.readlines():
     (proId, proName, mgiId) = string.split(line, TAB)
     proId = string.strip(proId)
     proName = string.strip(proName)
-    mgiIds = string.strip(mgiId)
-    #mgiId = "MGI:%s" % mgiId
-    
-    vocFile.write('%s%s%s%s%s%s%s%s%s%s' % (proName, TAB, proId, TAB, TAB, TAB, TAB, TAB, TAB, CRT))
-    for m in string.split(mgiIds, ';'):
-        mgiId = string.strip(m)
-	assocFile.write('%s%s%s%s' % (mgiId, TAB, proId, CRT))
+    mgiId = string.strip(mgiId)
+    if proId not in proIdList:
+	vocFile.write('%s%s%s%s%s%s%s%s%s%s' % (proName, TAB, proId, TAB, TAB, TAB, TAB, TAB, TAB, CRT))
+    proIdList.append(proId)
+    assocFile.write('%s%s%s%s' % (mgiId, TAB, proId, CRT))
     
 #
 # Post Process
