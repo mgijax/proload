@@ -1,3 +1,9 @@
+TAG: proload-4-4-1-1
+DATE:03/03/2011
+STAFF: sc
+CHANGES: TR10479 PRO ID change
+1) proload.config.default - set ASSOC_EXTERNAL_LDB="Protein Ontology"
+
 TAG: proload-4-3-3-7
 DATE:04/19/2010
 STAFF: sc
