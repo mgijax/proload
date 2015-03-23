@@ -52,7 +52,6 @@
 import sys
 import os
 import mgi_utils
-import loadlib
 import string
 
 print '%s' % mgi_utils.date()
@@ -85,20 +84,11 @@ proIdList = []
 # Initialize
 #
 
-try:
-    inFile = open(inFilePath, 'r')
-except:
-    exit('Could not open file for reading %s\n' % inFilePath)
+inFile = open(inFilePath, 'r')
 
-try:
-    vocFile = open(vocFilePath, 'w')
-except:
-    exit('Could not open file for writing %s\n' % vocFilePath)
+vocFile = open(vocFilePath, 'w')
 
-try:
-    assocFile = open(assocFilePath, 'w')
-except:
-    exit('Could not open file for writing %s\n' % assocFilePath)
+assocFile = open(assocFilePath, 'w')
 
 #
 # Process
