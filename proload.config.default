@@ -50,9 +50,12 @@ INFILE_NAME_PRO=${DATADOWNLOADS}/pro_mappings/PRO_mgi.txt
 INFILE_NAME_VOC=${INPUTDIR}/provoc.txt
 # ASSOCLOAD expects this parameter name
 INFILE_NAME=${INPUTDIR}/proassoc.txt
+# Annotation loader
+ANNOTINPUTFILE=${INPUTDIR}/proannot.txt
 
 export FILEDIR ARCHIVEDIR LOGDIR RPTDIR OUTPUTDIR INPUTDIR INFILE_NAME_PRO
 export INFILE_NAME_VOC INFILE_NAME
+export ANNOTINPUTFILE
 
 #  Complete path name of the log files
 LOG_PROC=${LOGDIR}/proload.proc.log
@@ -86,6 +89,21 @@ ASSOC_TARGET_LDB=MGI
 ASSOC_EXTERNAL_LDB="Protein Ontology"
 
 export ASSOC_TARGET ASSOC_EXTERNAL_LDB
+
+
+# Annotation loader settings
+
+ANNOTDATADIR=$OUTPUTDIR
+ANNOTTYPENAME="Protein Ontology/Marker"
+ANNOTPROPERTY=82
+ANNOTLOG=${LOGDIR}/proload_annot.log
+DELETEREFERENCE=$J_NUMBER
+DELETEUSER=$JOBSTREAM
+ANNOTOBSOLETE=0
+
+export ANNOTDATADIR ANNOTTYPENAME ANNOTPROPERTY ANNOTLOG
+export DELETEREFERENCE DELETEUSER ANNOTOBSOLETE
+
 
 ###########################################################################
 #

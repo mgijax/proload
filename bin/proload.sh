@@ -121,6 +121,33 @@ STAT=$?
 checkStatus ${STAT} "${PROLOAD}/bin/createInputFiles.py"
 
 #
+# run annotation load delete
+#
+
+# make temp blank file for annotload to source
+# 	because our values have already been 
+#	sourced from proload.config
+TMP_FILE=${PROLOAD}/bin/.blank.tmp
+touch $TMP_FILE
+
+# TODO(kstone): annotload should be able to run without argument, assuming config values set
+
+# TODO(kstone): annotload should use the ANNOTDATADIR value for generating output
+#	not the current working directory
+
+cd $ANNOTDATADIR
+
+# do the delete
+ANNOTMODE=delete
+export ANNOTMODE
+${ANNOTLOAD}/annotload.csh $TMP_FILE
+STAT=$?
+checkStatus ${STAT} "$ANNOTLOAD/annotload.csh $TMP_FILE"
+
+cd -
+
+
+#
 # run the vocabulary load
 #
 echo "Running vocload to load Protein Ontology" >> ${LOG_DIAG}
@@ -139,6 +166,26 @@ echo "Running Protein Ontology association load" >> ${LOG_DIAG}
 ${ASSOCLOADER_SH} ${CONFIG_LOAD} ${JOBKEY}
 STAT=$?
 checkStatus ${STAT} "${ASSOCLOADER_SH} ${CONFIG_LOAD}"
+
+
+#
+# run annotation load
+#
+echo "Running Protein Ontology/Marker annotation load" >> ${LOG_DIAG}
+
+cd $ANNOTDATADIR
+
+# do the add
+ANNOTMODE=new
+export ANNOTMODE
+${ANNOTLOAD}/annotload.csh $TMP_FILE
+STAT=$?
+checkStatus ${STAT} "$ANNOTLOAD/annotload.csh $TMP_FILE"
+
+rm $TMP_FILE
+
+cd -
+
 
 #
 # Touch the "lastrun" file to note when the load was run.

@@ -12,6 +12,7 @@
 #	 3. INFILE_NAME_PRO
 #	 4. INFILE_NAME_VOC
 #	 5. INFILE_NAME (assocload)
+#	 6. ANNOTINPUTFILE (annotation load)
 #
 # Inputs:
 #	1. PRO ID to MGI mapping file tab-delimited in following format:
@@ -36,7 +37,17 @@
 #	    line 1 header: "MGI" "Protein Ontology (PRO)"
 # 	    1. MGI ID
 #           2. PRO ID
-#	 3. log file
+#	 3. tab delimited file in annotation load format:
+#	    1. term ID
+#	    2. marker ID
+#	    3. J Number
+#	    4. Evidence Code
+#	    5. blank
+#	    6. blank
+#	    7. load user
+#	    8. date
+#	    9. blank
+#	 4. log file
 # 
 # Exit Codes:
 #
@@ -62,6 +73,12 @@ proLDBName = os.environ['ASSOC_EXTERNAL_LDB']
 inFilePath = os.environ['INFILE_NAME_PRO']
 vocFilePath = os.environ['INFILE_NAME_VOC']
 assocFilePath= os.environ['INFILE_NAME']
+annotFilePath = os.environ['ANNOTINPUTFILE']
+
+JNUMBER = os.environ['J_NUMBER']
+LOAD_USER_NAME = os.environ['JOBSTREAM']
+ANNOT_EVIDENCE_CODE = 'IEA'
+CDATE = mgi_utils.date("%m/%d/%Y")
 
 # file descriptors
 
@@ -71,14 +88,8 @@ inFile = ''
 vocFile = ''
 # output for assocload
 assocFile = ''
-
-# constants
-TAB= '\t'
-CRT = '\n'
-SPACE = ' '
-
-# current set of pro IDs currently written to vocload input file
-proIdList = []
+# output for annotload
+annotFile = ''
 
 #
 # Initialize
@@ -90,32 +101,69 @@ vocFile = open(vocFilePath, 'w')
 
 assocFile = open(assocFilePath, 'w')
 
+annotFile = open(annotFilePath, 'w')
+
+# set of IDs written to vocload file
+vocIdSet = set([])
+
 #
 # Process
 #
 
-# write out assocload header
-assocFile.write('%s%s%s%s' % ('MGI', TAB, proLDBName, CRT))
+try: 
 
-# throw away header line
-header = inFile.readline()
+    # write out assocload header
+    assocFile.write('MGI\t%s\n' % (proLDBName))
 
-for line in inFile.readlines():
-    (proId, proName, mgiId) = string.split(line, TAB)
-    proId = string.strip(proId)
-    proName = string.strip(proName)
-    mgiId = string.strip(mgiId)
-    if proId not in proIdList:
-	vocFile.write('%s%s%s%s%s%s%s%s%s%s' % (proName, TAB, proId, TAB, TAB, TAB, TAB, TAB, TAB, CRT))
-    proIdList.append(proId)
-    assocFile.write('%s%s%s%s' % (mgiId, TAB, proId, CRT))
-    
-#
-# Post Process
-#
+    # throw away header line
+    header = inFile.readline()
 
-inFile.close()
-vocFile.close()
-assocFile.close()
+    for line in inFile.readlines():
+	(proId, proName, mgiId) = string.split(line, '\t')
+	proId = string.strip(proId)
+	proName = string.strip(proName)
+	mgiId = string.strip(mgiId)
+	
+	# vocload file
+	if proId not in vocIdSet:
+	    vocFile.write('%s\n' % '\t'.join(
+		[proName, 
+		 proId,
+		 '',
+		 '',
+		 '',
+		 '',
+		 '',
+		 ''
+		]
+	    ))
+	vocIdSet.add(proId)
+
+	# association file
+	assocFile.write('%s\n' % '\t'.join(
+		[mgiId,
+		 proId
+		]
+	))
+
+	# annotation file
+	annotFile.write('%s\n' % '\t'.join(
+		[proId,
+		 mgiId,
+		 JNUMBER,
+		 ANNOT_EVIDENCE_CODE,
+		 '',
+		 '',
+		 LOAD_USER_NAME,
+		 CDATE,
+		 ''
+		]
+	))
+
+finally:
+
+    inFile.close()
+    vocFile.close()
+    assocFile.close()
 
 print '%s' % mgi_utils.date()
