@@ -1,8 +1,19 @@
+TAG: proload-6-0-2-1
+DATE: 12/03/2015
+STAFF: lec
+CHANGES:
+1) TR12070
+
 TAG: proload-6-0-1-1
 DATE: 11/30/2015
 STAFF: dbm
 CHANGES: TR11904 & TR12199
 1) proload.config.default: Don't mail curator log to mgiadmin
+
+TAG: proload-tr12070-1
+DATE: 12/03/2015
+STAFF: lec
+1) TR12070
 
 TAG: proload-tr12070-BP
 DATE: 9/10/2015
