@@ -46,7 +46,7 @@ OUTPUTDIR=${FILEDIR}/output
 # directory where input files for vocload and assocload are created by
 # createInputFiles.py
 INPUTDIR=${FILEDIR}/input
-INFILE_NAME_PRO=${DATADOWNLOADS}/pro_mappings/PRO_mgi.txt
+INFILE_NAME_PRO=${DATADOWNLOADS}/research.bioinformatics.udel.edu/PRO/mgi/PRO_mgi.txt
 INFILE_NAME_VOC=${INPUTDIR}/provoc.txt
 # ASSOCLOAD expects this parameter name
 INFILE_NAME=${INPUTDIR}/proassoc.txt
