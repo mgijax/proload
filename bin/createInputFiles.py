@@ -1,5 +1,3 @@
-#!/usr/local/bin/python
-
 ##########################################################################
 #
 # Purpose:
@@ -63,9 +61,8 @@
 import sys
 import os
 import mgi_utils
-import string
 
-print '%s' % mgi_utils.date()
+print('%s' % mgi_utils.date())
 
 # PRO logical DB Name
 proLDBName = os.environ['ASSOC_EXTERNAL_LDB']
@@ -119,46 +116,46 @@ try:
     header = inFile.readline()
 
     for line in inFile.readlines():
-	(proId, proName, mgiId) = string.split(line, '\t')
-	proId = string.strip(proId)
-	proName = string.strip(proName)
-	mgiId = string.strip(mgiId)
-	
-	# vocload file
-	if proId not in vocIdSet:
-	    vocFile.write('%s\n' % '\t'.join(
-		[proName, 
-		 proId,
-		 '',
-		 '',
-		 '',
-		 '',
-		 '',
-		 ''
-		]
-	    ))
-	vocIdSet.add(proId)
+        (proId, proName, mgiId) = str.split(line, '\t')
+        proId = str.strip(proId)
+        proName = str.strip(proName)
+        mgiId = str.strip(mgiId)
+        
+        # vocload file
+        if proId not in vocIdSet:
+            vocFile.write('%s\n' % '\t'.join(
+                [proName, 
+                 proId,
+                 '',
+                 '',
+                 '',
+                 '',
+                 '',
+                 ''
+                ]
+            ))
+        vocIdSet.add(proId)
 
-	# association file
-	assocFile.write('%s\n' % '\t'.join(
-		[mgiId,
-		 proId
-		]
-	))
+        # association file
+        assocFile.write('%s\n' % '\t'.join(
+                [mgiId,
+                 proId
+                ]
+        ))
 
-	# annotation file
-	annotFile.write('%s\n' % '\t'.join(
-		[proId,
-		 mgiId,
-		 JNUMBER,
-		 ANNOT_EVIDENCE_CODE,
-		 '',
-		 '',
-		 LOAD_USER_NAME,
-		 CDATE,
-		 ''
-		]
-	))
+        # annotation file
+        annotFile.write('%s\n' % '\t'.join(
+                [proId,
+                 mgiId,
+                 JNUMBER,
+                 ANNOT_EVIDENCE_CODE,
+                 '',
+                 '',
+                 LOAD_USER_NAME,
+                 CDATE,
+                 ''
+                ]
+        ))
 
 finally:
 
@@ -166,4 +163,4 @@ finally:
     vocFile.close()
     assocFile.close()
 
-print '%s' % mgi_utils.date()
+print('%s' % mgi_utils.date())
