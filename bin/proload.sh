@@ -116,7 +116,7 @@ fi
 # create input files
 #
 echo 'Running createInputFiles.py' >> ${LOG_DIAG}
-${PROLOAD}/bin/createInputFiles.py
+${PYTHON} ${PROLOAD}/bin/createInputFiles.py
 STAT=$?
 checkStatus ${STAT} "${PROLOAD}/bin/createInputFiles.py"
 
